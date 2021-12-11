@@ -32,34 +32,7 @@ class RecomendsPlants extends StatelessWidget {
         });
   }
 }
-/*<Widget>[
-          
-          RecomendPlantCard(
-            image: "assets/images/image_1.png",
-            title: "Samantha",
-            country: "Russia",
-            price: 440,
-            press: () {
 
-            },
-          ),
-          RecomendPlantCard(
-            image: "assets/images/image_2.png",
-            title: "Angelica",
-            country: "Russia",
-            price: 440,
-            press: () {
-
-            },
-          ),
-          RecomendPlantCard(
-            image: "assets/images/image_3.png",
-            title: "Samantha",
-            country: "Russia",
-            price: 440,
-            press: () {},
-          ),
-        ],*/
 class RecomendPlantCard extends StatelessWidget {
   const RecomendPlantCard({
     Key key,
@@ -79,11 +52,11 @@ class RecomendPlantCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: EdgeInsets.only(
-        left: kDefaultPadding,
+        left: kDefaultPadding/4,
         top: kDefaultPadding / 2,
         bottom: kDefaultPadding * 2.5,
       ),
-      width: size.width * 0.8,
+      width: size.width * 0.9,
       height: size.height*0.4,
       child: Column(
         children: <Widget>[
@@ -94,16 +67,12 @@ class RecomendPlantCard extends StatelessWidget {
             placeholder: (context, url) => CircularProgressIndicator(),
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
-          // FadeInImage.memoryNetwork(
-          //   fit: BoxFit.cover,
-          //   height: size.height*0.4,
-          //   placeholder: kTransparentImage,
-          //   image: image,
-          // ),
-          //Image.asset(image),
+
           GestureDetector(
             onTap: press,
             child: Container(
+              width: size.width*.7,
+
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -119,7 +88,9 @@ class RecomendPlantCard extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Row(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
@@ -139,7 +110,7 @@ class RecomendPlantCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Spacer(),
+
                   price==200?Text('no-rate'):Text(
                     '$price star',
                     style: Theme.of(context)
