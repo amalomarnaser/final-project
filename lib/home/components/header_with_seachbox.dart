@@ -76,6 +76,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                         child: Focus(
                             onFocusChange: (focus) => {
                               if(focus==true){searchcli()}
+                              else{searchclick2()}
                             },
                             child: TextField(
                                controller:con ,

@@ -25,7 +25,7 @@ class FavoritePage extends StatelessWidget {
         ),
         body: Consumer<WatchList>(builder: (context, provider, x) {
           return ListView(children: [
-            HeaderWithSearchBox(size:MediaQuery.of(context).size ,con:inputcont ,searchcli:()=>{movieListDisplay.setsearchActivated()},searchclick2:()=>{movieListDisplay.setsearchUnActivated()}),
+            HeaderWithSearchBox(size:MediaQuery.of(context).size ,con:inputcont ,searchcli:()=>{movieListDisplay.setsearchActivated()},searchclick2:()=>{movieListDisplay.filterSearchArray(inputcont.text)}),
             Visibility(
               visible: movieListDisplay.searchActivated ,
               child: Container(
