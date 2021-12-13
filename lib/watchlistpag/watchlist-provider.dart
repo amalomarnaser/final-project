@@ -114,5 +114,11 @@ class WatchList extends ChangeNotifier {
     notifyListeners();
 
   }
+
+  deleteFilter(){
+    setIsSearchunActive();
+    setSelectedGenre('all');
+    notifyListeners();
+  }
 }
 

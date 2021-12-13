@@ -85,6 +85,25 @@ class FavoritePage extends StatelessWidget {
                         ),
                       );
                     })),),
+            Visibility(
+              visible:movieListDisplay.isSearch ,
+              child: Container(
+              margin: EdgeInsets.all(5),
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                color:Color(0xffc6ecc6),
+                onPressed: ()=>{
+                movieListDisplay.deleteFilter()
+
+                },
+                child: Text(
+                  "x filter",
+                  style: TextStyle(color:Colors.black),
+                ),
+              ),
+            ),),
 
             Container(
 
