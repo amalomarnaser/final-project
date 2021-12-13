@@ -57,32 +57,34 @@ class FavoritePage extends StatelessWidget {
                       })),
                   ),
             ),
-            Container(
-               alignment: Alignment.center,
-               height: MediaQuery.of(context).size.height*0.08,
-               margin: EdgeInsets.fromLTRB(2, 0, 2, 5),
-               child: ListView.builder(
-                   scrollDirection: Axis.horizontal,
-                   itemCount: movieListDisplay.genreTypes.length,
-                   itemBuilder: (BuildContext ctxt, int index) {
-                 return Container(
-                   margin: EdgeInsets.all(5),
-                   child: FlatButton(
-                     shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(20),
-                     ),
-                     color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.black:Color(0xffc6ecc6).withOpacity(.3),
-                     onPressed: ()=>{
-                     //  print(movieListDisplay.genreTypes[index])
-                       movieListDisplay.setSelectedGenre(movieListDisplay.genreTypes[index])
-                     },
-                     child: Text(
-                       movieListDisplay.genreTypes[index],
-                       style: TextStyle(color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.white:Colors.black),
-                     ),
-                   ),
-                 );
-               })),
+            Visibility(
+              visible: !movieListDisplay.isSearch,
+              child: Container(
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height*0.08,
+                margin: EdgeInsets.fromLTRB(2, 0, 2, 5),
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: movieListDisplay.genreTypes.length,
+                    itemBuilder: (BuildContext ctxt, int index) {
+                      return Container(
+                        margin: EdgeInsets.all(5),
+                        child: FlatButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.black:Color(0xffc6ecc6).withOpacity(.3),
+                          onPressed: ()=>{
+                            //  print(movieListDisplay.genreTypes[index])
+                            movieListDisplay.setSelectedGenre(movieListDisplay.genreTypes[index])
+                          },
+                          child: Text(
+                            movieListDisplay.genreTypes[index],
+                            style: TextStyle(color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.white:Colors.black),
+                          ),
+                        ),
+                      );
+                    })),),
 
             Container(
 
@@ -92,14 +94,14 @@ class FavoritePage extends StatelessWidget {
                       height: MediaQuery.of(context).size.height,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                          itemCount: (movieListDisplay.selectedGenreType=='all'? movieList.length:movieListDisplay.filteredGenreList.length),
+                          itemCount: movieListDisplay.isSearch?movieListDisplay.filteredSearchList.length:(movieListDisplay.selectedGenreType=='all'? movieList.length:movieListDisplay.filteredGenreList.length),
                           itemBuilder: (BuildContext ctxt, int index) {
                             return   RecomendPlantCard(
-                              image: (movieListDisplay.selectedGenreType=='all'? movieList[index].poster:movieListDisplay.filteredGenreList[index].poster),
-                              title:( movieListDisplay.selectedGenreType=='all'? movieList[index].title:movieListDisplay.filteredGenreList[index].title),
-                              country: (movieListDisplay.selectedGenreType=='all'? movieList[index].genre:movieListDisplay.filteredGenreList[index].genre),
+                              image: movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].poster:(movieListDisplay.selectedGenreType=='all'? movieList[index].poster:movieListDisplay.filteredGenreList[index].poster),
+                              title:movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].title:( movieListDisplay.selectedGenreType=='all'? movieList[index].title:movieListDisplay.filteredGenreList[index].title),
+                              country: movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].genre:(movieListDisplay.selectedGenreType=='all'? movieList[index].genre:movieListDisplay.filteredGenreList[index].genre),
                               //price:  movieListDisplay.selectedGenreType=='all'?movieList[index].imdbRating!='N/A'?double.parse(movieList[index].imdbRating):200:movieListDisplay.filteredGenreList[index].imdbRating!='N/A'?double.parse(movieListDisplay.filteredGenreList[index].imdbRating):200,
-                              price:  (movieListDisplay.selectedGenreType=='all'?movieList[index].imdbRating!='N/A'?double.parse(movieList[index].imdbRating):200:movieListDisplay.filteredGenreList[index].imdbRating!='N/A'?double.parse(movieListDisplay.filteredGenreList[index].imdbRating):200),
+                              price:  movieListDisplay.isSearch?((movieListDisplay.filteredSearchList[index].imdbRating=="N/A")?200:double.parse(movieListDisplay.filteredSearchList[index].imdbRating)):(movieListDisplay.selectedGenreType=='all'?movieList[index].imdbRating!='N/A'?double.parse(movieList[index].imdbRating):200:movieListDisplay.filteredGenreList[index].imdbRating!='N/A'?double.parse(movieListDisplay.filteredGenreList[index].imdbRating):200),
                               press: () {
 
                               },
