@@ -99,7 +99,7 @@ class FavoritePage extends StatelessWidget {
 
                 },
                 child: Text(
-                  "x filter",
+                  "remove filter",
                   style: TextStyle(color:Colors.black),
                 ),
               ),
