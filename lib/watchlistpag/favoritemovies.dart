@@ -15,7 +15,7 @@ class FavoritePage extends StatelessWidget {
     final movieListDisplay = Provider.of<WatchList>(context);
     final List<MovieInfo> movieList = movieListDisplay.mylist;
 
-    TextEditingController inputcont;
+    TextEditingController inputcont = new TextEditingController();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -25,7 +25,7 @@ class FavoritePage extends StatelessWidget {
         ),
         body: Consumer<WatchList>(builder: (context, provider, x) {
           return ListView(children: [
-            HeaderWithSearchBox(size:MediaQuery.of(context).size ,con:inputcont ,searchcli:()=>{movieListDisplay.setsearchActivated()}),
+            HeaderWithSearchBox(size:MediaQuery.of(context).size ,con:inputcont ,searchcli:()=>{movieListDisplay.setsearchActivated()},searchclick2:()=>{movieListDisplay.setsearchUnActivated()}),
             Visibility(
               visible: movieListDisplay.searchActivated ,
               child: Container(
@@ -45,8 +45,8 @@ class FavoritePage extends StatelessWidget {
                             ),
                             color:movieListDisplay.selectetSearchKey==movieListDisplay.searchKeys[index]? Colors.black:Color(0xffc6ecc6).withOpacity(.3),
                             onPressed: ()=>{
-                              //  print(movieListDisplay.genreTypes[index])
-                              movieListDisplay.setSelectedSearchKey(movieListDisplay.searchKeys[index],'kill')
+
+                              movieListDisplay.setSelectedSearchKey(movieListDisplay.searchKeys[index])
                             },
                             child: Text(
                               movieListDisplay.searchKeys[index],

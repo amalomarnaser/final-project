@@ -71,15 +71,24 @@ class WatchList extends ChangeNotifier {
    else{filteredGenreList = mylist.where((i) => i.genre.toLowerCase().contains(selectedGenreType)).toList();print(filteredGenreList.toString());}
 
   }
-  setSelectedSearchKey(String key,String input){
+  setSelectedSearchKey(String key){
     selectetSearchKey=key;
     print(selectetSearchKey);
-    setSearchFilteredArray(selectetSearchKey,input);
+
     notifyListeners();
 
   }
   setsearchActivated(){
-    this.searchActivated=!searchActivated;
+    this.searchActivated=true;
+    notifyListeners();
+  }
+  setsearchUnActivated(){
+    this.searchActivated=false;
+    notifyListeners();
+  }
+  filterSearchArray(String input){
+    setSearchFilteredArray(selectetSearchKey,input);
+    setsearchUnActivated();
     notifyListeners();
   }
   setSearchFilteredArray(String key,String input){

@@ -5,9 +5,10 @@ import 'package:untitled9/home/constants.dart';
 class HeaderWithSearchBox extends StatelessWidget {
   final TextEditingController con;
   final Function searchcli;
+  final Function searchclick2;
   const HeaderWithSearchBox({
     Key key,
-    @required this.size,  this.con, this.searchcli,
+    @required this.size,  this.con, this.searchcli, this.searchclick2,
   }) : super(key: key);
 
   final Size size;
@@ -91,7 +92,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                                 )
                                 ),
                         ),),
-                  Icon(Icons.search),
+                  IconButton(icon: Icon(Icons.search),onPressed: (){searchclick2();con.text!=''?print(con.text):print('no text found');},),
                 ],
               ),
             ),
