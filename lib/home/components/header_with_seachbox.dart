@@ -3,15 +3,19 @@ import 'package:untitled9/home/constants.dart';
 
 
 class HeaderWithSearchBox extends StatelessWidget {
+  final TextEditingController con;
+  final Function searchcli;
   const HeaderWithSearchBox({
     Key key,
-    @required this.size,
+    @required this.size,  this.con, this.searchcli,
   }) : super(key: key);
 
   final Size size;
 
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
       margin: EdgeInsets.only(bottom: kDefaultPadding * 1.5),
       // It will cover 20% of our total height
@@ -26,7 +30,7 @@ class HeaderWithSearchBox extends StatelessWidget {
             ),
             height: size.height * 0.2 - 27,
             decoration: BoxDecoration(
-              color: kPrimaryColor,
+              color: Colors.black,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(36),
                 bottomRight: Radius.circular(36),
@@ -35,7 +39,7 @@ class HeaderWithSearchBox extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Text(
-                  'Hi Omar !',
+                  'my watch list',
                   style: Theme.of(context).textTheme.headline5.copyWith(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
@@ -67,21 +71,26 @@ class HeaderWithSearchBox extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Expanded(
-                    child: TextField(
-                      onChanged: (value) {},
-                      decoration: InputDecoration(
-                        hintText: "Search",
-                        hintStyle: TextStyle(
-                          color: kPrimaryColor.withOpacity(0.5),
-                        ),
-                        enabledBorder: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        // surffix isn't working properly  with SVG
-                        // thats why we use row
-                        // suffixIcon: SvgPicture.asset("assets/icons/search.svg"),
-                      ),
-                    ),
-                  ),
+                    child: FocusScope(
+                        child: Focus(
+                            onFocusChange: (focus) => {
+                              print("fatima: $focus")
+                            },
+                            child: TextField(
+                               controller:con ,
+                                onChanged: (value) { searchcli();},
+                                decoration: InputDecoration(
+                                hintText: "Search",
+                                hintStyle: TextStyle(
+                                color: Color(0xFF0C9869).withOpacity(.5),
+                                ),
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+
+                                ),
+                                )
+                                ),
+                        ),),
                   Icon(Icons.search),
                 ],
               ),

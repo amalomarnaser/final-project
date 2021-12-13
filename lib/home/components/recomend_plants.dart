@@ -51,27 +51,28 @@ class RecomendPlantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      padding: EdgeInsets.fromLTRB(6, 5, 7, 0),
       margin: EdgeInsets.only(
-        left: kDefaultPadding/4,
+        left: kDefaultPadding/2,
         top: kDefaultPadding / 2,
         bottom: kDefaultPadding * 2.5,
       ),
-      width: size.width * 0.9,
+      width: size.width * 0.6,
       height: size.height*0.4,
       child: Column(
         children: <Widget>[
          //  Image.network(image,fit: BoxFit.cover,height: size.height*0.4,),
           CachedNetworkImage(
-            fit: BoxFit.cover,height: size.height*0.4 ,
+            fit: BoxFit.fill,height: size.height*0.4 ,width: size.width*.6,
             imageUrl: image,
-            placeholder: (context, url) => CircularProgressIndicator(),
+            placeholder: (context, url) => CircularProgressIndicator(color: Colors.green.withOpacity(.4),),
             errorWidget: (context, url, error) => Icon(Icons.error),
           ),
 
           GestureDetector(
             onTap: press,
             child: Container(
-              width: size.width*.7,
+              width: size.width*.6,
 
               padding: EdgeInsets.all(kDefaultPadding / 2),
               decoration: BoxDecoration(

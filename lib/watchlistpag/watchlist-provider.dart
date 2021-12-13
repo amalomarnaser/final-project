@@ -7,10 +7,14 @@ class WatchList extends ChangeNotifier {
   WatchList() {
     getAllFaviroute();
   }
-  List<String> genreTypes=['comedy','romance','action','adventure','documentary','short','drama'];
-  String selectedGenreType= '';
+  List<String> genreTypes=['all','comedy','romance','action','adventure','documentary','short','drama',];
+  String selectedGenreType= 'all';
+  List<String> searchKeys=['title','genre','year','rating'];
+  String selectetSearchKey='title';
+   bool searchActivated=false;
   List<MovieInfo> mylist = [];
  List<MovieInfo> filteredGenreList = [];
+ List<MovieInfo> filteredSearchList = [];
   List<String> faviroteIds = [];
 
   getAllFaviroute() async {
@@ -63,9 +67,21 @@ class WatchList extends ChangeNotifier {
 
   }
   setFilteredArray(String genre){
-    if(genre == genreTypes[0]){filteredGenreList=mylist.where((e) => e.genre!=null).toList();}
-   filteredGenreList = mylist.where((i) => i.genre.toLowerCase().contains(selectedGenreType)).toList();
-  print(filteredGenreList.toString());
+    if(genre == 'all'){filteredGenreList=mylist;}
+   else{filteredGenreList = mylist.where((i) => i.genre.toLowerCase().contains(selectedGenreType)).toList();print(filteredGenreList.toString());}
+
+  }
+  setSelectedSearchKey(String key,String input){
+    selectetSearchKey=key;
+    print(selectetSearchKey);
+    setSearchFilteredArray(selectetSearchKey,input);
+    notifyListeners();
+
+  }
+  setSearchFilteredArray(String key,String input){
+  if(key=='title'){  filteredSearchList = mylist.where((i) => i.title.toLowerCase().contains(input.toLowerCase())).toList();print(filteredSearchList.toString());}
+   else{filteredSearchList = mylist.where((i) => i.genre.toLowerCase().contains(selectetSearchKey)).toList();print(filteredGenreList.toString());}
+
   }
 }
 

@@ -14,18 +14,52 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final movieListDisplay = Provider.of<WatchList>(context);
     final List<MovieInfo> movieList = movieListDisplay.mylist;
-
+    Function handleclick(){
+      movieListDisplay.searchActivated=true;
+    }
+    TextEditingController inputcont;
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color(0xFF0C9869),
+          backgroundColor: Colors.black,
           toolbarHeight: 30,
           centerTitle: true,
         ),
         body: Consumer<WatchList>(builder: (context, provider, x) {
           return ListView(children: [
-            HeaderWithSearchBox(size:MediaQuery.of(context).size ,),
-             Container(
+            HeaderWithSearchBox(size:MediaQuery.of(context).size ,con:inputcont ,searchcli:handleclick()),
+            Visibility(
+              visible: movieListDisplay.searchActivated ,
+              child: Container(
+                child:  Container(
+                  alignment: Alignment.center,
+                  height: MediaQuery.of(context).size.height*0.08,
+                  margin: EdgeInsets.fromLTRB(2, 0, 2, 5),
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: movieListDisplay.searchKeys.length,
+                      itemBuilder: (BuildContext ctxt, int index) {
+                        return Container(
+                          margin: EdgeInsets.all(5),
+                          child: FlatButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            color:movieListDisplay.selectetSearchKey==movieListDisplay.searchKeys[index]? Colors.black:Color(0xffc6ecc6).withOpacity(.3),
+                            onPressed: ()=>{
+                              //  print(movieListDisplay.genreTypes[index])
+                              movieListDisplay.setSelectedSearchKey(movieListDisplay.searchKeys[index],'kill')
+                            },
+                            child: Text(
+                              movieListDisplay.searchKeys[index],
+                              style: TextStyle(color:movieListDisplay.selectetSearchKey==movieListDisplay.searchKeys[index]? Colors.white:Colors.black),
+                            ),
+                          ),
+                        );
+                      })),
+                  ),
+            ),
+            Container(
                alignment: Alignment.center,
                height: MediaQuery.of(context).size.height*0.08,
                margin: EdgeInsets.fromLTRB(2, 0, 2, 5),
@@ -39,20 +73,19 @@ class FavoritePage extends StatelessWidget {
                      shape: RoundedRectangleBorder(
                        borderRadius: BorderRadius.circular(20),
                      ),
-                     color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? kPrimaryColor:Colors.white,
+                     color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.black:Color(0xffc6ecc6).withOpacity(.3),
                      onPressed: ()=>{
+                     //  print(movieListDisplay.genreTypes[index])
                        movieListDisplay.setSelectedGenre(movieListDisplay.genreTypes[index])
                      },
                      child: Text(
                        movieListDisplay.genreTypes[index],
-                       style: TextStyle(color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.white:kPrimaryColor),
+                       style: TextStyle(color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.white:Colors.black),
                      ),
                    ),
                  );
                })),
-            // Expanded(
-            //   flex: 1,
-            //     child: TitleWithMoreBtn(title: "your watch List", press: () {})),
+
             Container(
 
                 child: Container(
@@ -61,13 +94,14 @@ class FavoritePage extends StatelessWidget {
                       height: MediaQuery.of(context).size.height,
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
-                          itemCount: movieListDisplay.selectedGenreType==''? movieList.length:movieListDisplay.filteredGenreList.length,
+                          itemCount: (movieListDisplay.selectedGenreType=='all'? movieList.length:movieListDisplay.filteredGenreList.length),
                           itemBuilder: (BuildContext ctxt, int index) {
                             return   RecomendPlantCard(
-                              image: movieListDisplay.selectedGenreType==''? movieList[index].poster:movieListDisplay.filteredGenreList[index].poster,
-                              title: movieListDisplay.selectedGenreType==''? movieList[index].title:movieListDisplay.filteredGenreList[index].title,
-                              country: movieListDisplay.selectedGenreType==''? movieList[index].year:movieListDisplay.filteredGenreList[index].year,
-                              price:  movieListDisplay.selectedGenreType==''?movieList[index].imdbRating!='N/A'?double.parse(movieList[index].imdbRating):200:movieListDisplay.filteredGenreList[index].imdbRating!='N/A'?double.parse(movieListDisplay.filteredGenreList[index].imdbRating):200,
+                              image: (movieListDisplay.selectedGenreType=='all'? movieList[index].poster:movieListDisplay.filteredGenreList[index].poster),
+                              title:( movieListDisplay.selectedGenreType=='all'? movieList[index].title:movieListDisplay.filteredGenreList[index].title),
+                              country: (movieListDisplay.selectedGenreType=='all'? movieList[index].genre:movieListDisplay.filteredGenreList[index].genre),
+                              //price:  movieListDisplay.selectedGenreType=='all'?movieList[index].imdbRating!='N/A'?double.parse(movieList[index].imdbRating):200:movieListDisplay.filteredGenreList[index].imdbRating!='N/A'?double.parse(movieListDisplay.filteredGenreList[index].imdbRating):200,
+                              price:  (movieListDisplay.selectedGenreType=='all'?movieList[index].imdbRating!='N/A'?double.parse(movieList[index].imdbRating):200:movieListDisplay.filteredGenreList[index].imdbRating!='N/A'?double.parse(movieListDisplay.filteredGenreList[index].imdbRating):200),
                               press: () {
 
                               },

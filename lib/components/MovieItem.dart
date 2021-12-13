@@ -42,10 +42,7 @@ class MovieItem extends StatelessWidget {
                       return
                         IconButton(
                             onPressed:(){
-                              // watchList.exists(movie)?watchList.remove(movie):watchList.add(movie);
 
-
-                              // print(movie.toMap());
                                getMovie(movie.imdbID).then((value) => {
                                 watchList.addMovie(value)
                                } );
@@ -55,31 +52,13 @@ class MovieItem extends StatelessWidget {
 
                     }
                 )
-                // IconButton(
-                //   onPressed:(){
-                //
-                //     WatchList watchlist = Provider.of<WatchList>(context, listen: false);
-                //     watchlist.add(movie);
-                //
-                //   },
-                //   icon: Provider.of<WatchList>(context, listen: false).exists(movie)? Icon(Icons.star): Icon(Icons.star_border_sharp)),
+
 
 
               ]
 
           ),
-          // Expanded(
-          //
-          //     child:IconButton(
-          //            onPressed:(){
-          //
-          //              WatchList watchlist = Provider.of<WatchList>(context, listen: false);
-          //                 watchlist.add(movie);
-          //
-          // },
-          //        icon: Provider.of<WatchList>(context, listen: false).exists(movie)? Icon(Icons.star): Icon(Icons.star_border_sharp)),
-          //
-          //     )
+
 
 
         ],

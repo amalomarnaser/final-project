@@ -11,6 +11,9 @@ import 'package:flutter/services.dart';
 import 'package:untitled9/watchlistpag/favoritemovies.dart';
 import 'package:untitled9/watchlistpag/watchlist-provider.dart';
 import 'dart:io';
+
+
+
 class MoviesAppHome extends StatefulWidget {
   @override
   MoviesAppHomeState createState() => MoviesAppHomeState();
@@ -35,12 +38,18 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: Center(child: Text('Search Movies *_*')),
       ),
-      body: Column(
+      body: SafeArea(
+        top: false,
+        child: Column(
         children: <Widget>[
+
           Container(
             child: Row(children: <Widget>[
               Column(children: [
@@ -50,7 +59,7 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
                 child: Container(
                   padding: EdgeInsets.all(5),
                   child: TextField(
-                    
+
                     // Icon(Icons.movie_filter_outlined),
                     controller: searchTextController,
                     decoration: InputDecoration(hintText: 'Enter a search term please *_*'),
@@ -77,9 +86,9 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
 
             padding: EdgeInsets.all(10),
           ),
-         // Image.asset('assets/image/a.png'),
-            //رييييم الصورة
-          if (searchText.length > 0)
+          // Image.asset('assets/image/a.png'),
+          //رييييم الصورة
+         (searchText.length > 0)?
             FutureBuilder<List<Movie>>(
                 future: searchMovies(searchText),
                 builder: (context, snapshot) {
@@ -91,27 +100,25 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
                       Text('sorry , this movie is not found\n pleas enter another movie name ');
                   }
                   return CircularProgressIndicator();
-                }),
+                }):Container(child: Text("welcome to movie app"),),
+
+          //
           //         Expanded(child:Column(children: [
           //         Image.asset('assets/image/a.png'),
           //
           // ],)
           //         )
         ],
-      ),
+      ),),
       drawer: Drawer(
           child :Container(
-            color: Colors.white10,
+            color: Color(0xffe0ebeb),
             child: ListView(
               children: [
                 DrawerHeader(
                     decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                            colors: <Color>[
-                              Colors.pink,
-                              Colors.black12,
-                            ]
-                        )
+                      color:Color(0xff000000),
+
                     ),
                     child:
                     Column(
@@ -121,7 +128,7 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
                           Row(
                             children: [
 
-                              Text("Hello ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold , ),),
+                              Text("welcome back omar ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold ,color: Colors.white ),),
                             ],
                           ),
                         ]
@@ -132,6 +139,7 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
                     title: Text("My Favorite Movies  ",style: TextStyle(fontSize: 15,color: Colors.brown ),),
 
                     onTap:(){
+
                       Navigator.push(context ,
                           MaterialPageRoute(builder: (context)=> FavoritePage())
                       );
@@ -143,31 +151,7 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
           )
 
 
-        /*Container(
-         color: Colors.brown,
-          child:
-            Consumer<WatchList>(
-             builder: (context ,watchList ,child){
-              return ListView.builder(
-                itemCount: watchList.mylist.length,
-                itemBuilder: (context, index) {
-                 return Dismissible(
-                  key: Key(watchList.mylist[index].title),
-                    onDismissed: (direction){
-                    watchList.remove(watchList.mylist[index]);
-                    },
-                    child: MovieItem(
-                      movie:watchList.mylist[index],
-                    )
 
-          );
-
-        },
-
-      );
-    }
-    ),
-    )*/
 
       ),
     );
