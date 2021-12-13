@@ -14,9 +14,7 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final movieListDisplay = Provider.of<WatchList>(context);
     final List<MovieInfo> movieList = movieListDisplay.mylist;
-    Function handleclick(){
-      movieListDisplay.searchActivated=true;
-    }
+
     TextEditingController inputcont;
     return Scaffold(
         backgroundColor: Colors.white,
@@ -27,7 +25,7 @@ class FavoritePage extends StatelessWidget {
         ),
         body: Consumer<WatchList>(builder: (context, provider, x) {
           return ListView(children: [
-            HeaderWithSearchBox(size:MediaQuery.of(context).size ,con:inputcont ,searchcli:handleclick()),
+            HeaderWithSearchBox(size:MediaQuery.of(context).size ,con:inputcont ,searchcli:()=>{movieListDisplay.setsearchActivated()}),
             Visibility(
               visible: movieListDisplay.searchActivated ,
               child: Container(

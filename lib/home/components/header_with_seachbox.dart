@@ -74,11 +74,11 @@ class HeaderWithSearchBox extends StatelessWidget {
                     child: FocusScope(
                         child: Focus(
                             onFocusChange: (focus) => {
-                              print("fatima: $focus")
+                              if(focus==true){searchcli()}
                             },
                             child: TextField(
                                controller:con ,
-                                onChanged: (value) { searchcli();},
+                                onChanged: (value) { },
                                 decoration: InputDecoration(
                                 hintText: "Search",
                                 hintStyle: TextStyle(
