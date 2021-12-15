@@ -73,7 +73,7 @@ class FavoritePage extends StatelessWidget {
                   ),
                   IconButton(icon: Icon(Icons.search),
                     onPressed: (){
-                      inputcont.text!=""?movieListDisplay.filterSearchArray(inputcont.text):()=>{movieListDisplay.searchActivated};
+                      inputcont.text!=''?movieListDisplay.filterSearchArray(inputcont.text):()=>{};
                          },),
                 ],
               ),
@@ -84,7 +84,7 @@ class FavoritePage extends StatelessWidget {
               child: Container(
                 child:  Container(
                   alignment: Alignment.center,
-                  height: MediaQuery.of(context).size.height*0.08,
+                  height: 40,
                   margin: EdgeInsets.fromLTRB(2, 0, 2, 5),
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -172,7 +172,6 @@ class FavoritePage extends StatelessWidget {
                               image: movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].poster:(movieListDisplay.selectedGenreType=='all'? movieList[index].poster:movieListDisplay.filteredGenreList[index].poster),
                               title:movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].title:( movieListDisplay.selectedGenreType=='all'? movieList[index].title:movieListDisplay.filteredGenreList[index].title),
                               country: movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].genre:(movieListDisplay.selectedGenreType=='all'? movieList[index].genre:movieListDisplay.filteredGenreList[index].genre),
-                              //price:  movieListDisplay.selectedGenreType=='all'?movieList[index].imdbRating!='N/A'?double.parse(movieList[index].imdbRating):200:movieListDisplay.filteredGenreList[index].imdbRating!='N/A'?double.parse(movieListDisplay.filteredGenreList[index].imdbRating):200,
                               price:  movieListDisplay.isSearch?((movieListDisplay.filteredSearchList[index].imdbRating=="N/A")?200:double.parse(movieListDisplay.filteredSearchList[index].imdbRating)):(movieListDisplay.selectedGenreType=='all'?movieList[index].imdbRating!='N/A'?double.parse(movieList[index].imdbRating):200:movieListDisplay.filteredGenreList[index].imdbRating!='N/A'?double.parse(movieListDisplay.filteredGenreList[index].imdbRating):200),
                               press: () {
 

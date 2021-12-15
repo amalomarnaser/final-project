@@ -7,32 +7,6 @@ import 'package:untitled9/models/MovieInfo.dart';
 import 'package:untitled9/watchlistpag/watchlist-provider.dart';
 
 
-class RecomendsPlants extends StatelessWidget {
-  const RecomendsPlants({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final movieListDisplay = Provider.of<WatchList>(context);
-    final List<MovieInfo> movieList = movieListDisplay.mylist;
-    return ListView.builder(
-        itemCount:  movieList.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder:(BuildContext ctxt, int index){
-         return WatchListItem(
-            image: "assets/images/image_1.png",
-            title: "Samantha",
-            country: "Russia",
-            price: 440,
-            press: () {
-
-            },
-          );
-        });
-  }
-}
-
 class WatchListItem extends StatelessWidget {
   const WatchListItem({
     Key key,
@@ -53,9 +27,9 @@ class WatchListItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.fromLTRB(6, 5, 7, 0),
       margin: EdgeInsets.only(
-        left: kDefaultPadding/2,
-        top: kDefaultPadding / 2,
-        bottom: kDefaultPadding * 2.5,
+        left: 10,
+        top: 10,
+        bottom: 25,
       ),
       width: size.width * 0.6,
       height: size.height*0.4,
