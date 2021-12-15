@@ -9,7 +9,7 @@ class WatchList extends ChangeNotifier {
   }
   List<String> genreTypes=['all','comedy','romance','action','adventure','documentary','short','drama',];
   String selectedGenreType= 'all';
-  List<String> searchKeys=['title','genre','year','rating'];
+  List<String> searchKeys=['title','genre','year'];
   String selectetSearchKey='title';
    bool searchActivated=false;
    bool isSearch=false;
@@ -104,7 +104,7 @@ class WatchList extends ChangeNotifier {
       filteredSearchList=mylist.where((element) => element.year==input).toList();
     }
 
-   else{filteredSearchList = mylist.where((i) => i.genre.toLowerCase().contains(selectetSearchKey)).toList();}
+
 
   }
   setIsSearchActive(){

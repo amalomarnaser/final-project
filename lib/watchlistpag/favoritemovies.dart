@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:untitled9/components/MovieItem.dart';
 import 'package:untitled9/home/components/header_with_seachbox.dart';
 import 'package:untitled9/home/components/watch-list-item.dart';
-import 'package:untitled9/home/components/title_with_more_bbtn.dart';
 import 'package:untitled9/home/constants.dart';
 import 'package:untitled9/models/Movie.dart';
 import 'package:untitled9/models/MovieInfo.dart';
@@ -26,12 +25,61 @@ class FavoritePage extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          toolbarHeight: 30,
           centerTitle: true,
+          title: Text('my watch list'),
         ),
         body: Consumer<WatchList>(builder: (context, provider, x) {
           return ListView(children: [
-            HeaderWithSearchBox(con:inputcont ,searchcli:handleTextFieldClick,searchclick2:handleSearchIconClick),
+
+           Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.all( 10),
+
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              height: 54,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 10),
+                    blurRadius: 50,
+                    color: kPrimaryColor.withOpacity(0.23),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: <Widget>[
+                  Container(
+
+                    child: Expanded(
+                      child: FocusScope(
+                          child: Focus(
+                              onFocusChange: (focus) => {
+                                if(focus==true){handleTextFieldClick()}
+
+                              },
+                              child: TextField(
+                                 controller:inputcont ,
+
+                                  decoration: InputDecoration(
+                                  hintText: "Search",
+                                  hintStyle: TextStyle(
+                                  color: Color(0xFF0C9869).withOpacity(.5),
+                                  ),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+
+                                  ),
+                                  )
+                                  ),
+                          ),),
+                  ),
+                  IconButton(icon: Icon(Icons.search),onPressed: (){handleSearchIconClick();inputcont.text!=''?print(inputcont.text):print('no text found');},),
+                ],
+              ),
+            ),
+
             Visibility(
               visible: movieListDisplay.searchActivated ,
               child: Container(

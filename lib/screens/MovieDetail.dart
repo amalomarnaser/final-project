@@ -42,7 +42,7 @@ class MovieDetail extends StatelessWidget {
                         PaddedText("Meta Score : " + snapshot.data.metaScore),
                       ]));
             } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
+              return Text("${snapshot.error.toString()}");
             }
             return Center(child: CircularProgressIndicator());
           }),

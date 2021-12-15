@@ -97,7 +97,7 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
                         child: MovieList(movies: snapshot.data, itemClick: this.itemClick));
                   } else if (snapshot.hasError) {
                     return
-                      Text('sorry , this movie is not found\n pleas enter another movie name ');
+                      Text('${snapshot.error.toString()}');
                   }
                   return CircularProgressIndicator();
                 }):Container(child: Text("welcome to movie app"),),

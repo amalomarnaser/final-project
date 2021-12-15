@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:untitled9/watchlistpag/watchlist-provider.dart';
 
 import 'helpers/db-helper.dart';
-import 'home/home_screen.dart';
 import 'screens/MoviesAppHome.dart';
 import 'package:provider/provider.dart';
 
