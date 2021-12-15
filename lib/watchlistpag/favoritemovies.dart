@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled9/components/MovieItem.dart';
-import 'package:untitled9/home/components/header_with_seachbox.dart';
 import 'package:untitled9/home/components/watch-list-item.dart';
 import 'package:untitled9/home/constants.dart';
 import 'package:untitled9/models/Movie.dart';
