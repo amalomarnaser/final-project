@@ -9,8 +9,11 @@ class WatchList extends ChangeNotifier {
   }
   List<String> genreTypes=['all','comedy','romance','action','adventure','documentary','short','drama',];
   String selectedGenreType= 'all';
+
+
   List<String> searchKeys=['title','genre','year'];
   String selectetSearchKey='title';
+
    bool searchActivated=false;
    bool isSearch=false;
   List<MovieInfo> mylist = [];

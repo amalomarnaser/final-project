@@ -36,7 +36,8 @@ Future<List<Movie>> searchMovies(String str) async {
         throw Exception('Something went wrong !');
       }
     }
-  } on SocketException catch (_) {
+  }
+  on SocketException catch (_) {
     throw Exception("there is no internet connection try connect to the internet and try again ");
   }
 
@@ -69,7 +70,8 @@ Future<MovieInfo> getMovie(movieId) async {
       }
 
     }
-  } on SocketException catch (_) {
+  }
+  on SocketException catch (_) {
     throw Exception("there is no internet connection try connect to the internet and try again ");
   }
 

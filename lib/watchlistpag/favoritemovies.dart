@@ -14,14 +14,9 @@ class FavoritePage extends StatelessWidget {
     final movieListDisplay = Provider.of<WatchList>(context);
     final List<MovieInfo> movieList = movieListDisplay.mylist;
     TextEditingController inputcont = new TextEditingController();
-    Function handleTextFieldClick(){
-      movieListDisplay.setsearchActivated();
-    }
-    Function handleSearchIconClick(){
-      inputcont.text!=""?movieListDisplay.filterSearchArray(inputcont.text):()=>{};
-    }
 
-    return Scaffold(
+
+   return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -29,6 +24,7 @@ class FavoritePage extends StatelessWidget {
           title: Text('my watch list'),
         ),
         body: Consumer<WatchList>(builder: (context, provider, x) {
+
           return ListView(children: [
 
            Container(
@@ -55,13 +51,13 @@ class FavoritePage extends StatelessWidget {
                     child: Expanded(
                       child: FocusScope(
                           child: Focus(
-                              onFocusChange: (focus) => {
-                                if(focus==true){handleTextFieldClick()}
 
-                              },
                               child: TextField(
-                                 controller:inputcont ,
 
+                                  controller:inputcont ,
+                                  onTap: (){
+                                    movieListDisplay.setsearchActivated();
+                                    },
                                   decoration: InputDecoration(
                                   hintText: "Search",
                                   hintStyle: TextStyle(
@@ -75,7 +71,10 @@ class FavoritePage extends StatelessWidget {
                                   ),
                           ),),
                   ),
-                  IconButton(icon: Icon(Icons.search),onPressed: (){handleSearchIconClick();inputcont.text!=''?print(inputcont.text):print('no text found');},),
+                  IconButton(icon: Icon(Icons.search),
+                    onPressed: (){
+                      inputcont.text!=""?movieListDisplay.filterSearchArray(inputcont.text):()=>{movieListDisplay.searchActivated};
+                         },),
                 ],
               ),
             ),
