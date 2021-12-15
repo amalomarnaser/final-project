@@ -4,7 +4,7 @@ import 'package:untitled9/home/constants.dart';
 
 import 'featurred_plants.dart';
 import 'header_with_seachbox.dart';
-import 'recomend_plants.dart';
+import 'watch-list-item.dart';
 import 'title_with_more_bbtn.dart';
 
 class Body extends StatelessWidget {
@@ -17,7 +17,7 @@ class Body extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          HeaderWithSearchBox(size: size),
+          HeaderWithSearchBox(),
           TitleWithMoreBtn(title: "Recomended", press: () {}),
           RecomendsPlants(),
           TitleWithMoreBtn(title: "Featured Plants", press: () {}),

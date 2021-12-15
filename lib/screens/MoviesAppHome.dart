@@ -90,7 +90,7 @@ class MoviesAppHomeState extends State<MoviesAppHome> {
           //رييييم الصورة
          (searchText.length > 0)?
             FutureBuilder<List<Movie>>(
-                future: searchMovies(searchText),
+                future: searchMovies(searchText),//list of movies
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Expanded(

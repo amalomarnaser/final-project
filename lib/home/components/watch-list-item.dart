@@ -20,7 +20,7 @@ class RecomendsPlants extends StatelessWidget {
         itemCount:  movieList.length,
         scrollDirection: Axis.horizontal,
         itemBuilder:(BuildContext ctxt, int index){
-         return RecomendPlantCard(
+         return WatchListItem(
             image: "assets/images/image_1.png",
             title: "Samantha",
             country: "Russia",
@@ -33,8 +33,8 @@ class RecomendsPlants extends StatelessWidget {
   }
 }
 
-class RecomendPlantCard extends StatelessWidget {
-  const RecomendPlantCard({
+class WatchListItem extends StatelessWidget {
+  const WatchListItem({
     Key key,
     this.image,
     this.title,
@@ -89,37 +89,40 @@ class RecomendPlantCard extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
+              child: Container(
 
-                            text: "$title\n".toUpperCase(),
-                            style: Theme.of(context).textTheme.button),
-                        TextSpan(
-                          text: "$country".toUpperCase(),
-                          style: TextStyle(
-                            color: kPrimaryColor.withOpacity(0.5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+
+                              text: "$title\n".toUpperCase(),
+                              style: Theme.of(context).textTheme.button),
+                          TextSpan(
+                            text: "$country".toUpperCase(),
+                            style: TextStyle(
+                              color: kPrimaryColor.withOpacity(0.5),
+                            ),
                           ),
-                        ),
 
 
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
 
-                  price==200?Text('no-rate'):Text(
-                    '$price star',
-                    style: Theme.of(context)
-                        .textTheme
-                        .button
-                        .copyWith(color: kPrimaryColor),
-                  )
-                ],
+                    price==200?Text('no-rate'):Text(
+                      '$price star',
+                      style: Theme.of(context)
+                          .textTheme
+                          .button
+                          .copyWith(color: kPrimaryColor),
+                    )
+                  ],
+                ),
               ),
             ),
           )

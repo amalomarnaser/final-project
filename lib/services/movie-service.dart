@@ -15,7 +15,12 @@ Future<List<Movie>> searchMovies(String str) async {
     if (data['Response'] == "True") {
       var  list = (data['Search'] as List).map((item) => new Movie.fromJson(item)).toList();
       return list;
-    } else {
+    }
+
+    else if(response.statusCode == 503){
+      throw Exception('oh no the server is down !');
+    }
+    else {
       throw Exception(data['Error']);
     }
   } else {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled9/components/MovieItem.dart';
 import 'package:untitled9/home/components/header_with_seachbox.dart';
-import 'package:untitled9/home/components/recomend_plants.dart';
+import 'package:untitled9/home/components/watch-list-item.dart';
 import 'package:untitled9/home/components/title_with_more_bbtn.dart';
 import 'package:untitled9/home/constants.dart';
 import 'package:untitled9/models/Movie.dart';
@@ -14,8 +14,14 @@ class FavoritePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final movieListDisplay = Provider.of<WatchList>(context);
     final List<MovieInfo> movieList = movieListDisplay.mylist;
-
     TextEditingController inputcont = new TextEditingController();
+    Function handleTextFieldClick(){
+      movieListDisplay.setsearchActivated();
+    }
+    Function handleSearchIconClick(){
+      inputcont.text!=""?movieListDisplay.filterSearchArray(inputcont.text):()=>{};
+    }
+
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -25,7 +31,7 @@ class FavoritePage extends StatelessWidget {
         ),
         body: Consumer<WatchList>(builder: (context, provider, x) {
           return ListView(children: [
-            HeaderWithSearchBox(size:MediaQuery.of(context).size ,con:inputcont ,searchcli:()=>{movieListDisplay.setsearchActivated()},searchclick2:()=>{inputcont.text!=""?movieListDisplay.filterSearchArray(inputcont.text):()=>{}}),
+            HeaderWithSearchBox(con:inputcont ,searchcli:handleTextFieldClick,searchclick2:handleSearchIconClick),
             Visibility(
               visible: movieListDisplay.searchActivated ,
               child: Container(
@@ -73,7 +79,7 @@ class FavoritePage extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20),
                           ),
-                          color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.black:Color(0xffc6ecc6).withOpacity(.3),
+                          color:movieListDisplay.selectedGenreType==movieListDisplay.genreTypes[index]? Colors.black:Color(0xffc6ecc6),
                           onPressed: ()=>{
                             //  print(movieListDisplay.genreTypes[index])
                             movieListDisplay.setSelectedGenre(movieListDisplay.genreTypes[index])
@@ -115,7 +121,7 @@ class FavoritePage extends StatelessWidget {
                         scrollDirection: Axis.horizontal,
                           itemCount: movieListDisplay.isSearch?movieListDisplay.filteredSearchList.length:(movieListDisplay.selectedGenreType=='all'? movieList.length:movieListDisplay.filteredGenreList.length),
                           itemBuilder: (BuildContext ctxt, int index) {
-                            return   RecomendPlantCard(
+                            return   WatchListItem(
                               image: movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].poster:(movieListDisplay.selectedGenreType=='all'? movieList[index].poster:movieListDisplay.filteredGenreList[index].poster),
                               title:movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].title:( movieListDisplay.selectedGenreType=='all'? movieList[index].title:movieListDisplay.filteredGenreList[index].title),
                               country: movieListDisplay.isSearch?movieListDisplay.filteredSearchList[index].genre:(movieListDisplay.selectedGenreType=='all'? movieList[index].genre:movieListDisplay.filteredGenreList[index].genre),

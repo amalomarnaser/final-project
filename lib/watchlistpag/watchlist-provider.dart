@@ -94,15 +94,17 @@ class WatchList extends ChangeNotifier {
     notifyListeners();
   }
   setSearchFilteredArray(String key,String input){
-    if(key=='title'){  filteredSearchList = mylist.where((i) => i.title.toLowerCase().contains(input.toLowerCase())).toList();print(filteredSearchList.toString());}
+    if(key=='title'){
+      filteredSearchList = mylist.where((i) => i.title.toLowerCase().contains(input.toLowerCase())).toList();
+    }
     else if(key=='genre'){
-      filteredSearchList = mylist.where((i) => i.genre.toLowerCase().contains(input.toLowerCase())).toList();print(filteredSearchList.toString());
+      filteredSearchList = mylist.where((i) => i.genre.toLowerCase().contains(input.toLowerCase())).toList();
     }
     else if(key=='year'){
       filteredSearchList=mylist.where((element) => element.year==input).toList();
     }
 
-   else{filteredSearchList = mylist.where((i) => i.genre.toLowerCase().contains(selectetSearchKey)).toList();print(filteredSearchList.toString());}
+   else{filteredSearchList = mylist.where((i) => i.genre.toLowerCase().contains(selectetSearchKey)).toList();}
 
   }
   setIsSearchActive(){

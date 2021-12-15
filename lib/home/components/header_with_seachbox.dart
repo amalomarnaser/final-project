@@ -8,19 +8,18 @@ class HeaderWithSearchBox extends StatelessWidget {
   final Function searchclick2;
   const HeaderWithSearchBox({
     Key key,
-    @required this.size,  this.con, this.searchcli, this.searchclick2,
+     this.con, this.searchcli, this.searchclick2,
   }) : super(key: key);
 
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
-
+     const size=50;
 
     return Container(
       margin: EdgeInsets.only(bottom: kDefaultPadding * 1.5),
       // It will cover 20% of our total height
-      height: size.height * 0.2,
+      height: 80,
       child: Stack(
         children: <Widget>[
           Container(
@@ -29,25 +28,7 @@ class HeaderWithSearchBox extends StatelessWidget {
               right: kDefaultPadding,
               bottom: 36 + kDefaultPadding,
             ),
-            height: size.height * 0.2 - 27,
-            decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(36),
-                bottomRight: Radius.circular(36),
-              ),
-            ),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  'my watch list',
-                  style: Theme.of(context).textTheme.headline5.copyWith(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-               //
-              ],
-            ),
+            height: 90 ,color: Colors.black,
           ),
           Positioned(
             bottom: 0,
@@ -71,28 +52,31 @@ class HeaderWithSearchBox extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  Expanded(
-                    child: FocusScope(
-                        child: Focus(
-                            onFocusChange: (focus) => {
-                              if(focus==true){searchcli()}
-                              else{searchclick2()}
-                            },
-                            child: TextField(
-                               controller:con ,
-                                onChanged: (value) { },
-                                decoration: InputDecoration(
-                                hintText: "Search",
-                                hintStyle: TextStyle(
-                                color: Color(0xFF0C9869).withOpacity(.5),
-                                ),
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
+                  Container(
 
-                                ),
-                                )
-                                ),
-                        ),),
+                    child: Expanded(
+                      child: FocusScope(
+                          child: Focus(
+                              onFocusChange: (focus) => {
+                                if(focus==true){searchcli()}
+                                else{searchclick2()}
+                              },
+                              child: TextField(
+                                 controller:con ,
+                                  onChanged: (value) { },
+                                  decoration: InputDecoration(
+                                  hintText: "Search",
+                                  hintStyle: TextStyle(
+                                  color: Color(0xFF0C9869).withOpacity(.5),
+                                  ),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+
+                                  ),
+                                  )
+                                  ),
+                          ),),
+                  ),
                   IconButton(icon: Icon(Icons.search),onPressed: (){searchclick2();con.text!=''?print(con.text):print('no text found');},),
                 ],
               ),
