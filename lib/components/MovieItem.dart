@@ -1,5 +1,6 @@
 // ignore_for_file: sdk_version_ui_as_code
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled9/models/Movie.dart' as models;
@@ -22,9 +23,17 @@ class MovieItem extends StatelessWidget {
         children: <Widget>[
           Column(children: <Widget>[
 
-            if (this.movie.poster != "N/A")
-              Image.network(this.movie.poster, height: 100, width: 100)
-
+            //if (this.movie.poster != "N/A")
+             // Image.network(this.movie.poster, height: 100, width: 100)
+            Container(
+              margin: EdgeInsets.fromLTRB(3, 3, 9, 3),
+              child: CachedNetworkImage(
+               fit: BoxFit.fill,height:100 ,width:70,
+              imageUrl: this.movie.poster,
+              placeholder: (context, url) => CircularProgressIndicator(color: Colors.green.withOpacity(.4),),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
+            ),
           ]),
           Column(
               crossAxisAlignment: CrossAxisAlignment.start,

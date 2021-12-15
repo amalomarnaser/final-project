@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled9/services/movie-service.dart';
 import 'package:untitled9/models/MovieInfo.dart';
@@ -27,11 +28,14 @@ class MovieDetail extends StatelessWidget {
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                           alignment: Alignment.center,
-                          child: Image.network(
-                            snapshot.data.poster,
-                            width: 200,
+                          child:
+                           CachedNetworkImage(
+                            fit: BoxFit.fill,width:200,
+                            imageUrl: snapshot.data.poster,
+                            placeholder: (context, url) => CircularProgressIndicator(color: Colors.green.withOpacity(.4),),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
                           ),
-                        ),
+                          ),
                         Text(snapshot.data.plot, textAlign: TextAlign.justify),
                         PaddedText("Year : " + snapshot.data.year),
                         PaddedText("Genre : " + snapshot.data.genre),
